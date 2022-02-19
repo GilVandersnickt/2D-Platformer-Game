@@ -1,6 +1,4 @@
 # Innovative Project 
-&nbsp;  
-&nbsp; 
 
 ## **Voorstel 1: 2D Game in Unity**
 
@@ -41,3 +39,8 @@ Voor de module **Innovative Project** zou ik mijn IMI project willen herbouwen i
     - Een Python versie van mijn IMI project.
 - **Waarom?**
     - Ik zou graag eens Python willen verkennen omdat deze programmeertaal zeer vaak wordt gebruikt.
+&nbsp;  
+&nbsp; 
+
+## Bronnenlijst
+- ...
