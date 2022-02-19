@@ -28,7 +28,7 @@ Voor de module **Innovative Project** zou ik een gitaarstemmer willen maken in J
 &nbsp;  
 &nbsp; 
 
-## **Voorstel 3: Imi project in Python**
+## **Voorstel 3: IMI project in Python**
 
 ### Project
 
