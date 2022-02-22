@@ -14,7 +14,7 @@ Voor de module **Innovative Project** zou ik een 2D game willen maken in Unity.
 &nbsp;  
 &nbsp; 
 
-## **Voorstel 2: Gitaarstemmer in Javascript**
+## **Voorstel 2: Gitaarstemmer in Javascript met machine learning**
 
 ### Project
 
