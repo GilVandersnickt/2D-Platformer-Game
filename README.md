@@ -1,6 +1,6 @@
 # Innovative Project 
 
-## **Voorstel 1: 2D Game in Unity**
+## **2D Game in Unity**
 
 ### Project
 
@@ -8,37 +8,24 @@ Voor de module **Innovative Project** zou ik een 2D game willen maken in Unity.
 
 ### Verantwoording en relevantie
 - **Wat is het?**
-    - Een 2D spel waarin een speler met een gekozen karakter probeert om obstakels te ontwijken en zo succesvol tot de finish navigeert.
+    - Een 2D spel vergelijkbaar met Super Mario waarin een speler met een gekozen karakter probeert om obstakels te ontwijken en zo succesvol tot de finish navigeert
 - **Waarom?**
-    - Ik wil graag eens ervaren hoe een spel wordt gemaakt in Unity.
-&nbsp;  
-&nbsp; 
+    - Ik wil graag eens ervaren hoe een spel wordt gemaakt in Unity
 
-## **Voorstel 2: Gitaarstemmer in Javascript met machine learning**
+### Functionaliteiten
+**Basis functionaliteiten**
+- Kiezen van een karakter
+- Een karakter kan zich naar links of rechts navigeren
+- Een karakter kan springen op en over obstakels
+- Een karakter kan een voorwerp opnemen die kan afgevuurd worden om obstakels te vernietigen
+- Een karakter kan een healthpack opnemen die een extra leven/bescherming toevoegt
+- Een karakter kan een booster opnemen die de snelheid van het karakter verhoogt
 
-### Project
+**Extra functionaliteiten**
+- Meerdere levels
+- Beperkte tijd per level maar met mogelijkheid om voorwerpen op te nemen die de tijd verlengen
+- Een karakter kan iets opnemen die de grootte van het karakter aanpast
 
-Voor de module **Innovative Project** zou ik een gitaarstemmer willen maken in Javascript.  
-
-### Verantwoording en relevantie
-- **Wat is het?**
-    - Een Javascript applicatie die de toonaard weergeeft wanneer de gebruiker een bepaalde snaar op zijn/haar gitaar aanslaat zodat het instrument kan gestemd worden volgens de correcte toonaarden.
-- **Waarom?**
-    - Ik wil graag eens ervaren hoe een applicatie wordt gebouwd die gebruik maakt van inkomend geluid en dit omzet naar een toonaard die kan weergegeven worden aan de gebruiker.
-&nbsp;  
-&nbsp; 
-
-## **Voorstel 3: IMI project in Python**
-
-### Project
-
-Voor de module **Innovative Project** zou ik mijn IMI project willen herbouwen in Python.  
-
-### Verantwoording en relevantie
-- **Wat is het?**
-    - Een Python versie van mijn IMI project.
-- **Waarom?**
-    - Ik zou graag eens Python willen verkennen omdat deze programmeertaal zeer vaak wordt gebruikt.
 &nbsp;  
 &nbsp; 
 
