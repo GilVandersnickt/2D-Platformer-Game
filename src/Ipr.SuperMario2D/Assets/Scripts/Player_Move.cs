@@ -8,6 +8,7 @@ public class Player_Move : MonoBehaviour
     private float moveX;
     public int playerSpeed = 10;
     public int playerJumpForce = 1250;
+    public bool onGround;
 
     // Update is called once per frame
     void Update()
@@ -19,7 +20,7 @@ public class Player_Move : MonoBehaviour
     {
         moveX = Input.GetAxis("Horizontal");
 
-        if(Input.GetButtonDown("Jump"))
+        if(Input.GetButtonDown("Jump") && onGround)
         {
             Jump();
         }
@@ -39,6 +40,7 @@ public class Player_Move : MonoBehaviour
     void Jump()
     {
         GetComponent<Rigidbody2D>().AddForce(Vector2.up * playerJumpForce);
+        onGround = false;
     }
 
     void FlipPlayer()
@@ -47,5 +49,13 @@ public class Player_Move : MonoBehaviour
         Vector2 localScale = gameObject.transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
+    }
+
+    void OnCollisionEnter2D (Collision2D collision)
+    {
+        if(collision.gameObject.tag.Equals("Ground"))
+        {
+            onGround = true;
+        }
     }
 }
