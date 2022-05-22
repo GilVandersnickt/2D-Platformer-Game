@@ -18,9 +18,17 @@ public class Enemy_Move : MonoBehaviour
 
     void Flip()
     {
-        if (XMoveDirection < 0)
-            XMoveDirection = 1;
-        else
+        if (XMoveDirection > 0)
+        {
             XMoveDirection = -1;
+        }
+        else
+        {
+            XMoveDirection = 1;
+        }
+        Vector2 localScale = gameObject.transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
+
     }
 }
