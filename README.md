@@ -30,4 +30,7 @@ Voor de module **Innovative Project** zou ik een 2D game willen maken in Unity.
 &nbsp; 
 
 ## Bronnenlijst
+- PRI-06-Unity.pdf in de cursus van de module programming integration door Dries Deboosere
+- https://docs.unity3d.com/Manual/Unity2D.html
+- https://learn.unity.com/ 
 - ...
