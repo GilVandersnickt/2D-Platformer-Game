@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Enemy_Move : MonoBehaviour
@@ -13,7 +14,14 @@ public class Enemy_Move : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(XMoveDirection, 0));
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(XMoveDirection, 0) * EnemySpeed;
         if (hit.distance < 0.5f)
+        {
             Flip();
+            if(hit.collider.tag == "Player")
+            {
+                //Destroy(hit.collider.gameObject);
+                SceneManager.LoadScene("SampleScene");
+            }
+        }
     }
 
     void Flip()
