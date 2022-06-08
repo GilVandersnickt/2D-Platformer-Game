@@ -14,6 +14,7 @@ public class Player_Move : MonoBehaviour
     void Update()
     {
         PlayerMove();
+        PlayerRaycast();
     }
 
     void PlayerMove()
@@ -53,9 +54,30 @@ public class Player_Move : MonoBehaviour
 
     void OnCollisionEnter2D (Collision2D collision)
     {
-        if(collision.gameObject.tag.Equals("Ground"))
+        //if (collision.gameObject.tag.Equals("Ground"))
+        //{
+        //    onGround = true;
+        //}
+    }
+    void PlayerRaycast ()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
+
+        if (hit != null && hit.collider != null && hit.distance < 0.9f && hit.collider.tag == "Enemy")
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * 100);
+            hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right *100);
+            hit.collider.gameObject.GetComponent<Rigidbody2D>().gravityScale = 8;
+            hit.collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            hit.collider.gameObject.GetComponent<Enemy_Move>().enabled = false;
+            Debug.Log("Killed enemy");
+            //Destroy(hit.collider.gameObject);
+
+        }
+        if (hit != null && hit.collider != null && hit.distance < 0.9f && hit.collider.tag != "Enemy")
         {
             onGround = true;
         }
+
     }
 }
