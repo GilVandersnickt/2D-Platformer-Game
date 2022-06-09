@@ -63,7 +63,7 @@ public class Player_Move : MonoBehaviour
         RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down);
         //Debug.Log($"{hitDown.distance} + {PlayerBaseDistance} + {hitDown.collider.tag} xxxxxxxxxxxx");
 
-        if (hitDown != null && hitDown.distance <= PlayerBaseDistance && hitDown.collider.tag != "Enemy")
+        if (hitDown.distance <= PlayerBaseDistance && hitDown.collider.tag != "Enemy")
         {
             //Debug.Log($"{hitDown.distance} + {PlayerBaseDistance} + {hitDown.collider.tag}");
             OnGround = true;
