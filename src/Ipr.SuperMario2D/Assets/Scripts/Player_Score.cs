@@ -13,6 +13,12 @@ public class Player_Score : MonoBehaviour
     public int CoinScoreValue = 10;
     public int TimeScoreMultiplier = 10;
 
+    void Start()
+    {
+        TimeLeftUI = GameObject.Find("TimeLeft");
+        ScoreUI = GameObject.Find("Score");
+    }
+
     // Update is called once per frame
     void Update()
     {
