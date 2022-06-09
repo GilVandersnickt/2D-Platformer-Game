@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &363334271873275663
+--- !u!1 &6588583746840424538
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 363334271873275659}
-  - component: {fileID: 363334271873275658}
-  - component: {fileID: 363334271873275661}
-  - component: {fileID: 363334271873275660}
-  - component: {fileID: 363334271873275656}
-  - component: {fileID: 363334271873275657}
-  - component: {fileID: 363334271873275702}
+  - component: {fileID: 6588583746840424535}
+  - component: {fileID: 6588583746840424536}
+  - component: {fileID: 6588583746840424537}
+  - component: {fileID: 6588583746840424530}
+  - component: {fileID: 6588583746840424531}
+  - component: {fileID: 6588583746840424532}
+  - component: {fileID: 6588583746840424533}
+  - component: {fileID: 6588583746840424534}
   m_Layer: 0
-  m_Name: p1_front
+  m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &363334271873275659
+--- !u!4 &6588583746840424535
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363334271873275663}
+  m_GameObject: {fileID: 6588583746840424538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.41, y: -0.88, z: 0}
+  m_LocalPosition: {x: -4, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &363334271873275658
+--- !u!212 &6588583746840424536
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363334271873275663}
+  m_GameObject: {fileID: 6588583746840424538}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1f220069e0b501b4f822c3959f2ecc04, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bd659335e49171e4cb6f94f2bfd45968, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,20 +88,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &363334271873275661
+--- !u!95 &6588583746840424537
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6588583746840424538}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb792cc2c77918b41ba383881777634b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &6588583746840424530
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363334271873275663}
+  m_GameObject: {fileID: 6588583746840424538}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.014005244, y: -0.016339421}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -111,16 +131,16 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.66, y: 0.92}
+  m_Size: {x: 0.4545902, y: 0.8873212}
   m_EdgeRadius: 0
---- !u!50 &363334271873275660
+--- !u!50 &6588583746840424531
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363334271873275663}
+  m_GameObject: {fileID: 6588583746840424538}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -134,46 +154,50 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &363334271873275656
+--- !u!114 &6588583746840424532
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363334271873275663}
+  m_GameObject: {fileID: 6588583746840424538}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5ac49fd8be129141bed774cfe90b1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 10
-  playerJumpForce: 1250
-  onGround: 0
---- !u!114 &363334271873275657
+  PlayerSpeed: 10
+  PlayerJumpForce: 1250
+  OnGround: 0
+  PlayerBaseDistance: 0.475
+--- !u!114 &6588583746840424533
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363334271873275663}
+  m_GameObject: {fileID: 6588583746840424538}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea7adbe1967570d4f86dd869a1b057d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
---- !u!114 &363334271873275702
+  Health: 0
+  MaxDepth: -4
+--- !u!114 &6588583746840424534
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363334271873275663}
+  m_GameObject: {fileID: 6588583746840424538}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a983a93ff13d3ee4fb4a22ee565f2759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  timeLeftUI: {fileID: 0}
-  scoreUI: {fileID: 0}
+  Score: 0
+  TimeLeftUI: {fileID: 0}
+  ScoreUI: {fileID: 0}
+  CoinScoreValue: 10
+  TimeScoreMultiplier: 10
