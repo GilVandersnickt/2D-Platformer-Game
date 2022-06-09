@@ -7,6 +7,7 @@ public class Enemy_Move : MonoBehaviour
 {
     public int EnemySpeed;
     public int XMoveDirection;
+    public int EnemyDamage = 100;
 
     // Update is called once per frame
     void Update()
@@ -18,8 +19,7 @@ public class Enemy_Move : MonoBehaviour
             Flip();
             if(hit.collider.tag == "Player")
             {
-                //Destroy(hit.collider.gameObject);
-                SceneManager.LoadScene("SampleScene");
+                hit.collider.gameObject.GetComponent<Player_Health>().Health -= EnemyDamage;
             }
         }
     }
