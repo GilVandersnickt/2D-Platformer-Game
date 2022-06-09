@@ -19,6 +19,7 @@ public class Camera_Control : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         float x = Mathf.Clamp(player.transform.position.x, xMin, xMax);
         float y = Mathf.Clamp(player.transform.position.y, yMin, yMin);
         gameObject.transform.position = new Vector3(x, y, gameObject.transform.position.z);
