@@ -9,6 +9,8 @@ TagManager:
   - EndOfLevel
   - Coin
   - Box
+  - TimeLeft
+  - Score
   layers:
   - Default
   - TransparentFX
