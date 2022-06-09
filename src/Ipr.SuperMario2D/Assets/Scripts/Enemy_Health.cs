@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class Enemy_Health : MonoBehaviour
 {
+    public float MaxDepth = -4;
+
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.transform.position.y < -10)
-        {
-            Destroy(gameObject);
-        }
+        CheckHealth();
+    }
+    void CheckHealth()
+    {
+        if (gameObject.transform.position.y < MaxDepth)
+            Die();
+    }
+    void Die()
+    {
+        Destroy(gameObject);
+        Debug.Log($"{gameObject.name} died");
     }
 }
