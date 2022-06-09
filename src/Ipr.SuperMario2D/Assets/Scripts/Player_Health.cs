@@ -5,33 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class Player_Health : MonoBehaviour
 {
-    public int health;
-
+    public int Health;
+    public float MaxDepth = -4;
 
     // Start is called before the first frame update
     void Start()
     {
-        health = 100;
+        Health = 100;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.transform.position.y < -4)
-        {
-            health = 0;
-        }
         CheckHealth();
+    }
+    void CheckHealth()
+    {
+        if (Health <= 0 || gameObject.transform.position.y < MaxDepth)
+            Die();
     }
 
     void Die()
     {
+        Debug.Log($"{gameObject.name} died");
         SceneManager.LoadScene("SampleScene");
     }
 
-    void CheckHealth()
-    {
-        if (health <= 0)
-            Die();
-    }
 }
