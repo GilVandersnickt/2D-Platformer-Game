@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - EndOfLevel
   - Coin
+  - Box
   layers:
   - Default
   - TransparentFX
