@@ -7,7 +7,7 @@ public class Character_Selection : MonoBehaviour
 {
     public void SelectCharacter(int player)
     {
-        PlayerPrefs.SetInt("SelectedCharacter", player-1);
+        PlayerPrefs.SetInt("SelectedCharacter", player);
         Debug.Log($"Player {player} selected");
         StartGame();
     }
