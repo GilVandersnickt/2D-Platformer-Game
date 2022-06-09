@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Player_Score : MonoBehaviour
 {
-    private float timeLeft = 120;
+    private float timeLeft;
     public int Score;
     public GameObject TimeLeftUI;
     public GameObject ScoreUI;
@@ -15,6 +15,8 @@ public class Player_Score : MonoBehaviour
 
     void Start()
     {
+        timeLeft = PlayerPrefs.GetInt("SelectedTime");
+        Debug.Log(timeLeft);
         TimeLeftUI = GameObject.Find("TimeLeft");
         ScoreUI = GameObject.Find("Score");
     }
