@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class Player_Score : MonoBehaviour
 {
     private float timeLeft;
-    public int Score;
-    public GameObject TimeLeftUI;
-    public GameObject ScoreUI;
+    public static int Score;
+    private GameObject TimeLeftUI;
+    private GameObject ScoreUI;
     public int CoinScoreValue = 10;
     public int TimeScoreMultiplier = 10;
 
@@ -27,26 +27,25 @@ public class Player_Score : MonoBehaviour
         UpdateUI();
         CheckTimeLeft();
     }
+    //void OnTriggerEnter2D(Collider2D trigger)
+    //{
+    //    switch (trigger.gameObject.tag)
+    //    {
+    //        case "EndOfLevel":
+    //            Score += (int)(timeLeft * TimeScoreMultiplier);
+    //            Debug.Log($"{trigger.gameObject.tag} reached");
+    //            break;
 
-    void OnTriggerEnter2D(Collider2D trigger)
-    {
-        switch (trigger.gameObject.tag)
-        {
-            case "EndOfLevel":
-                Score += (int)(timeLeft * TimeScoreMultiplier);
-                Debug.Log($"{trigger.gameObject.tag} reached");
-                break;
+    //        case "Coin":
+    //            Score += CoinScoreValue;
+    //            Destroy(trigger.gameObject);
+    //            Debug.Log($"{trigger.gameObject.tag} collected: +{CoinScoreValue} points");
+    //            break;
 
-            case "Coin":
-                Score += CoinScoreValue;
-                Destroy(trigger.gameObject);
-                Debug.Log($"{trigger.gameObject.tag} collected: +{CoinScoreValue} points");
-                break;
-
-            default:
-                break;
-        }
-    }
+    //        default:
+    //            break;
+    //    }
+    //}
     private void UpdateUI()
     {
         timeLeft -= Time.deltaTime;
