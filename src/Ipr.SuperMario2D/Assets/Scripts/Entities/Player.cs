@@ -1,9 +1,11 @@
-﻿namespace Assets.Scripts.Entities
+﻿using UnityEngine;
+
+namespace Assets.Scripts.Entities
 {
-    public class Player
+    public class Player : MonoBehaviour
     {
-        public string Name { get; set; }
-        public int Health { get; set; } = 2;
-        public int NumberOfCoins { get; set; }
+        public string Name;
+        public int Health;
+        public int NumberOfCoins;
     }
 }
