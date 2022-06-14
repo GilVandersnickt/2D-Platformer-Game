@@ -15,6 +15,7 @@ public class Enemy_Health : MonoBehaviour
     {
         if (gameObject.transform.position.y < MaxDepth)
             Die();
+
     }
     void Die()
     {
