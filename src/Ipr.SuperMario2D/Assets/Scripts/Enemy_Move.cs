@@ -7,7 +7,7 @@ public class Enemy_Move : MonoBehaviour
 {
     public int EnemySpeed;
     public int XMoveDirection;
-    public int EnemyDamage = 100;
+    public int EnemyDamage = 1;
 
     // Update is called once per frame
     void Update()
