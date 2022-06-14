@@ -1,15 +1,16 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using Assets.Scripts.Constants;
-using Zenject;
+using Assets.Scripts.Controllers.Player;
 using Assets.Scripts.Interfaces;
+using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 namespace Assets.Scripts.Controllers.Game
 {
     public class GameController : MonoBehaviour
     {
         private IGameService _gameService;
+        private IPlayerService _playerService;
 
         public GameObject GameOverScreen;
         public GameObject PauseScreen;
@@ -18,22 +19,32 @@ namespace Assets.Scripts.Controllers.Game
         public Image[] HeartsUI;
         public Sprite FullHeart;
         public Sprite EmptyHeart;
-
         public GameObject[] Characters;
 
+        public static int Health;
+        public static int Score;
+        public static bool IsGameOver;
         [Inject]
-        public void Construct(IGameService gameService)
+        PlayerController.Factory playerControllerFactory;
+
+        [Inject]
+        public void Construct(IGameService gameService, IPlayerService playerService)
         {
             _gameService = gameService;
+            _playerService = playerService;
         }
 
         private void Awake()
         {
-            //int characterIndex = PlayerPrefs.GetInt(PlayerPrefsTitles.SelectedCharacter, 0);
-            int characterIndex = 0;
-            GameObject player = Instantiate(Characters[characterIndex], new Vector2(-3, 0), Quaternion.identity);
+            int characterIndex = PlayerPrefs.GetInt(PlayerPrefsTitles.SelectedCharacter, 0) - 1;
+
+            var player = playerControllerFactory.Create();
+            Debug.Log("test gamecontroller factory");
+            Debug.Log(player);
             
-            _gameService.Start(player);
+            //Instantiate(Characters[characterIndex], new Vector2(-3, 0), Quaternion.identity);
+
+            _gameService.Start();
             PauseGame();
             ResumeGame();
         }
@@ -41,7 +52,8 @@ namespace Assets.Scripts.Controllers.Game
         void Update()
         {
             _gameService.Play();
-            _gameService.UpdateUI(TimeLeftUI, ScoreUI, GameOverScreen);
+            _gameService.UpdateData(Score, Health);
+            _gameService.UpdateUI(TimeLeftUI, ScoreUI, GameOverScreen, HeartsUI, EmptyHeart, FullHeart);
         }
 
         public void ReplayLevel()
