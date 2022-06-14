@@ -1,4 +1,7 @@
-﻿using Assets.Scripts.Interfaces;
+﻿using Assets.Scripts.Controllers.Enemy;
+using Assets.Scripts.Controllers.Game;
+using Assets.Scripts.Interfaces;
+using Assets.Scripts.Services;
 using UnityEngine;
 using Zenject;
 
@@ -6,14 +9,13 @@ namespace Assets.Scripts.Controllers.Player
 {
     public class PlayerController : MonoBehaviour
     {
-        private IGameService _gameService;
         private IPlayerService _playerService;
-        private int PlayerSpeed = 10;
-        private int PlayerJumpForce = 10;
-        public int CoinValue = 10;
+
+        private int PlayerSpeed;
+        private int PlayerJumpForce;
         public bool OnGround;
-        public float PlayerBaseDistance;
         private float Direction = 0;
+        public static int Health;
         public bool FacingRight = true;
         public Transform CheckOnGround;
         public LayerMask GroundLayer;
@@ -25,16 +27,77 @@ namespace Assets.Scripts.Controllers.Player
         {
             _playerService = playerService;
         }
+        
+        public class Factory : PlaceholderFactory<PlayerController> { }
 
-        private void Start()
+        void Awake()
         {
-            
+            PlayerSpeed = Constants.Player.PlayerSpeed;
+            PlayerJumpForce = Constants.Player.PlayerJumpForce;
         }
 
         void Update()
         {
-            //_playerService.Move(PlayerRigidBody, PlayerAnimator, CheckOnGround, GroundLayer);
+            _playerService.TakeCoin();
             Move();
+            PlayerRaycast();
+        }
+        void PlayerRaycast()
+        {
+            RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up);
+            RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down);
+
+            //if (hitUp.collider == null || hitDown.collider == null) return;
+
+            if (hitUp.collider != null && hitUp.distance < Constants.Player.PlayerBaseDistance && hitUp.collider.tag == "Box")
+            {
+                Destroy(hitUp.collider.gameObject);
+            }
+
+            //Debug.Log($"{hitDown.distance} + {PlayerBaseDistance} + {hitDown.collider.tag} xxxxxxxxxxxx");
+
+            if (hitDown.distance <= Constants.Player.PlayerBaseDistance && hitDown.collider.tag != "Enemy")
+            {
+                //Debug.Log($"{hitDown.distance} + {PlayerBaseDistance} + {hitDown.collider.tag}");
+                OnGround = true;
+            }
+
+            if (hitDown.distance < Constants.Player.PlayerBaseDistance && hitDown.collider.tag == "Enemy")
+            {
+                GetComponent<Rigidbody2D>().AddForce(Vector2.up * 100);
+                hitDown.collider.gameObject.GetComponent<Transform>().position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -10);
+                hitDown.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 100);
+                hitDown.collider.gameObject.GetComponent<Rigidbody2D>().gravityScale = 8;
+                hitDown.collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                hitDown.collider.gameObject.GetComponent<EnemyController>().enabled = false;
+                Debug.Log($"{gameObject.name} squished {hitDown.collider.gameObject.name}");
+
+            }
+            //if (hitDown.collider != null && hitDown.distance < PlayerBaseDistance && hitDown.collider.tag != "Enemy")
+            //{
+            //    OnGround = true;
+            //}
+
+        }
+
+        void OnTriggerEnter2D(Collider2D trigger)
+        {
+            switch (trigger.gameObject.tag)
+            {
+                case "EndOfLevel":
+                    GameController.IsGameOver = true;
+                    Debug.Log($"{trigger.gameObject.tag} reached");
+                    break;
+
+                case "Coin":
+                    _playerService.TakeCoin();
+                    Destroy(trigger.gameObject);
+                    Debug.Log($"{trigger.gameObject.tag} collected: +{Constants.Score.CoinValue} points");
+                    break;
+
+                default:
+                    break;
+            }
         }
         private void Move()
         {
