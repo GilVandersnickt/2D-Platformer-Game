@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Constants;
+﻿using Assets.Scripts.Controllers.Game;
+using Assets.Scripts.Entities;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,24 +10,20 @@ namespace Assets.Scripts.Services
     public class GameService : IGameService
     {
         public static bool GameOver;
-        private GameObject player;
+        private GameObject playerObject;
+        private Player currentPlayer;
 
         private float timeLeft;
-
         private int health;
         private int score;
 
-        private int characterIndex;
-
-        public void Start(GameObject currentPlayer)
+        public void Start()
         {
-            //characterIndex = PlayerPrefs.GetInt(PlayerPrefsTitles.SelectedCharacter, 0);
-            player = currentPlayer;
-            characterIndex = 0;
-            timeLeft = PlayerPrefs.GetInt(PlayerPrefsTitles.SelectedTime, 0);
-            score = 0;
-            health = 3;
-            GameOver = false;
+            //currentPlayer = GetNewPlayer();
+            timeLeft = PlayerPrefs.GetInt(Constants.PlayerPrefsTitles.SelectedTime, 0);
+            GameController.Score = 0;
+            GameController.Health = 2;
+            GameController.IsGameOver = false;
         }
 
         public void Play()
@@ -53,14 +50,29 @@ namespace Assets.Scripts.Services
 
         public void Menu()
         {
-            SceneManager.LoadScene(Scenes._MainMenu);
+            SceneManager.LoadScene(Constants.Scenes._MainMenu);
+        }
+        public void UpdateData(int score, int health)
+        {
+            this.score = score;
+            this.health = health;
         }
 
-        public void UpdateUI(GameObject timeObject, GameObject scoreObject, GameObject gameOverScreen)
+        public void UpdateUI(GameObject timeObject, GameObject scoreObject, GameObject gameOverScreen, Image[] hearts, Sprite emptyHeart, Sprite fullHeart)
         {
-            timeObject.gameObject.GetComponent<Text>().text = $"{UserInterface.TimeLeftText}{(int)timeLeft}";
-            scoreObject.gameObject.GetComponent<Text>().text = $"{UserInterface.ScoreText}{score}";
-
+            // Update UI for time and score 
+            timeObject.gameObject.GetComponent<Text>().text = $"{Constants.UserInterface.TimeLeftText}{(int)timeLeft}";
+            scoreObject.gameObject.GetComponent<Text>().text = $"{Constants.UserInterface.ScoreText}{score}";
+            // Update UI for health 
+            foreach (Image img in hearts)
+            {
+                img.sprite = emptyHeart;
+            }
+            for (int i = 0; i < health; i++)
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            // Check if game is over
             if (GameOver)
             {
                gameOverScreen.SetActive(true);
@@ -74,6 +86,10 @@ namespace Assets.Scripts.Services
                 Time.timeScale = 0;
                 GameOver = true;
             }
+        }
+        private Player GetNewPlayer()
+        {
+            return new Player { Name = "Current Player", Health = 3, NumberOfCoins = 0 };
         }
 
     }
