@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8112870141335712959}
   - component: {fileID: 418257007642278402}
   - component: {fileID: 622959326311643731}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player3
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -184,6 +184,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   MaxDepth: -4
+  Hearts: []
+  FullHeart: {fileID: 0}
+  EmptyHeart: {fileID: 0}
 --- !u!114 &622959326311643731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,8 +199,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a983a93ff13d3ee4fb4a22ee565f2759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 0
-  TimeLeftUI: {fileID: 0}
-  ScoreUI: {fileID: 0}
   CoinScoreValue: 10
   TimeScoreMultiplier: 10
