@@ -7,6 +7,7 @@ public class Player_Move : MonoBehaviour
     private float moveX;
     public int PlayerSpeed = 10;
     public int PlayerJumpForce = 1250;
+    public int CoinValue = 10;
     public bool OnGround;
     public float PlayerBaseDistance;
 
@@ -50,6 +51,25 @@ public class Player_Move : MonoBehaviour
     {
         GetComponent<Rigidbody2D>().AddForce(Vector2.up * PlayerJumpForce);
         OnGround = false;
+    }
+    void OnTriggerEnter2D(Collider2D trigger)
+    {
+        switch (trigger.gameObject.tag)
+        {
+            //case "EndOfLevel":
+            //    Player_Score.Score += (int)(timeLeft * TimeScoreMultiplier);
+            //    Debug.Log($"{trigger.gameObject.tag} reached");
+            //    break;
+
+            case "Coin":
+                Player_Score.Score += CoinValue;
+                Destroy(trigger.gameObject);
+                Debug.Log($"{trigger.gameObject.tag} collected: +{CoinValue} points");
+                break;
+
+            default:
+                break;
+        }
     }
 
     void PlayerRaycast ()
