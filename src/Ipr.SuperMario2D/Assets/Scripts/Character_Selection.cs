@@ -14,6 +14,6 @@ public class Character_Selection : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Level_001_Scene");
+        SceneManager.LoadScene("Level_002_Scene");
     }
 }
