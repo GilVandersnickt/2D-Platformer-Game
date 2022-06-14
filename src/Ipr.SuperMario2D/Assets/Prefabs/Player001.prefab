@@ -205,3 +205,4 @@ MonoBehaviour:
     m_Bits: 128
   PlayerRigidBody: {fileID: 5823181552878756692}
   PlayerAnimator: {fileID: 5823181552878756697}
+  CurrentPlayer: {fileID: 0}
