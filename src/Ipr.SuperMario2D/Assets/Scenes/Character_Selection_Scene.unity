@@ -208,7 +208,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 380923821}
-        m_TargetAssemblyTypeName: Character_Selection, Assembly-CSharp
+        m_TargetAssemblyTypeName: Assets.Scripts.Controllers.Game.MenuController,
+          Assembly-CSharp
         m_MethodName: SelectCharacter
         m_Mode: 3
         m_Arguments:
@@ -342,7 +343,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 380923821}
-        m_TargetAssemblyTypeName: Character_Selection, Assembly-CSharp
+        m_TargetAssemblyTypeName: Assets.Scripts.Controllers.Game.MenuController,
+          Assembly-CSharp
         m_MethodName: SelectCharacter
         m_Mode: 3
         m_Arguments:
@@ -626,7 +628,7 @@ GameObject:
   - component: {fileID: 380923822}
   - component: {fileID: 380923821}
   m_Layer: 0
-  m_Name: SelectionService
+  m_Name: CharacterSelectManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,7 +643,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 380923820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2502f1a8f256ca478845eaea04021e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 88d8c10205f7a57449ef7bbd124e8c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &380923822
@@ -658,6 +660,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &471564969
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7396363578116150058, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150058, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150058, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150058, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150058, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150058, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150058, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150058, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150058, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150058, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150058, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150063, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: m_Name
+      value: GameInstaller
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
 --- !u!1 &718050523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,7 +1383,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 380923821}
-        m_TargetAssemblyTypeName: Character_Selection, Assembly-CSharp
+        m_TargetAssemblyTypeName: Assets.Scripts.Controllers.Game.MenuController,
+          Assembly-CSharp
         m_MethodName: SelectCharacter
         m_Mode: 3
         m_Arguments:
