@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Controllers.Enemy;
 using Assets.Scripts.Controllers.Game;
-using Assets.Scripts.Controllers.Player;
 using Assets.Scripts.Interfaces;
 using System.Collections;
 using UnityEngine;
@@ -43,20 +42,24 @@ namespace Assets.Scripts.Services
             direction = Input.GetAxis("Horizontal");
             onGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
+            // Jump when player is on ground and jump button is pressed
             if (Input.GetButtonDown("Jump") && onGround)
             {
                 Jump(playerRigidBody);
             }
-
-            AnimatePlayer(playerAnimator);
-
             playerRigidBody.velocity = new Vector2(direction * Constants.Player.PlayerSpeed, playerRigidBody.velocity.y);
 
+            // Animation
+            AnimatePlayer(playerAnimator);
+
+            // Flip player
             if (facingRight && direction < 0 || !facingRight && direction > 0)
                 FlipPlayer(playerRigidBody.gameObject);
 
+            // Check if player is colliding
             PlayerRaycast(playerRigidBody.gameObject);
 
+            // Die when falling lower than max depth
             if (playerRigidBody.gameObject.transform.position.y < Constants.Player.MaxDepth)
             {
                 Die();
@@ -101,6 +104,7 @@ namespace Assets.Scripts.Services
 
             if (hitUp.collider == null && hitDown.collider == null) return;
 
+            // Check if player is colliding on the upside
             if (hitUp.collider != null && hitUp.distance < Constants.Player.PlayerBaseDistance)
                 switch (hitUp.collider.gameObject.tag)
                 {
@@ -113,6 +117,7 @@ namespace Assets.Scripts.Services
                         break;
                 }
 
+            // Check if player is colliding on the downside
             if (hitDown.distance < Constants.Player.PlayerBaseDistance)
                 switch (hitDown.collider.gameObject.tag)
                 {
@@ -132,10 +137,6 @@ namespace Assets.Scripts.Services
 
                     case Constants.Tags.Water:
                         player.GetComponent<Transform>().position = new Vector3(player.transform.position.x, player.transform.position.y, -1);
-                        player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 100);
-                        player.GetComponent<Rigidbody2D>().gravityScale = 8;
-                        player.GetComponent<BoxCollider2D>().enabled = false;
-                        player.GetComponent<PlayerController>().enabled = false;
                         Die();
                         Debug.Log($"{player.name} fell down the hole");
                         break;
@@ -147,6 +148,7 @@ namespace Assets.Scripts.Services
         }
         private IEnumerator GetHurt(Animator playerAnimator)
         {
+            // Make player invincible for 3 seconds after taking damage
             Physics2D.IgnoreLayerCollision(6, 8);
             playerAnimator.SetLayerWeight(1, 1);
             yield return new WaitForSeconds(3);
