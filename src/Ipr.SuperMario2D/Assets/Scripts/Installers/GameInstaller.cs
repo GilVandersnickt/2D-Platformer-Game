@@ -23,12 +23,8 @@ namespace Assets.Scripts.Installers
             Container.Bind<Player>().AsSingle();
 
             // Factory for instantiating a player
-            Container.BindFactory<PlayerController, PlayerController.Factory>().FromComponentInNewPrefab(playerPrefabs[GetCharacterIndex()]);
-        }
-
-        private int GetCharacterIndex()
-        {
-            return PlayerPrefs.GetInt(Constants.PlayerPrefsTitles.SelectedCharacter, 0) - 1;
+            Container.BindFactory<PlayerController, PlayerController.Factory>()
+                .FromComponentInNewPrefab(playerPrefabs[PlayerPrefs.GetInt(Constants.PlayerPrefsTitles.SelectedCharacter, 0) - 1]);
         }
     }
 }
