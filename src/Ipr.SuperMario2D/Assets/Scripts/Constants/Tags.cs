@@ -8,5 +8,7 @@
         public const string Box = "Box";
         public const string Coin = "Coin";
         public const string Water = "Water";
+        public const string Health = "Health";
+        public const string EndOfLevel = "EndOfLevel";
     }
 }
