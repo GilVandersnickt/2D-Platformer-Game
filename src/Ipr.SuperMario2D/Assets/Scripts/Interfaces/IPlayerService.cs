@@ -9,5 +9,6 @@ namespace Assets.Scripts.Interfaces
         public void TakeCoin();
         public void TakeDamage();
         public void Die();
+        public void Collide(Collider2D collider);
     }
 }
