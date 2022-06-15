@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Controllers.Game;
+using Assets.Scripts.Entities;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -69,7 +70,7 @@ namespace Assets.Scripts.Services
             // Check if game is over
             if (GameController.IsGameOver)
             {
-                gameOverScreen.SetActive(true);
+               gameOverScreen.SetActive(true);
             }
         }
 
