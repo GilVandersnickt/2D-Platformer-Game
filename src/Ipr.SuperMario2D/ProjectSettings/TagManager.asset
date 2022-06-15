@@ -12,6 +12,7 @@ TagManager:
   - TimeLeft
   - Score
   - Water
+  - Health
   layers:
   - Default
   - TransparentFX
