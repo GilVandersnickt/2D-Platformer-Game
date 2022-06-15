@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Controllers.Enemy;
 using Assets.Scripts.Controllers.Game;
+using Assets.Scripts.Controllers.Player;
 using Assets.Scripts.Interfaces;
 using System.Collections;
 using UnityEngine;
@@ -116,6 +117,16 @@ namespace Assets.Scripts.Services
                         hitDown.collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                         hitDown.collider.gameObject.GetComponent<EnemyController>().enabled = false;
                         Debug.Log($"{player.name} destroyed {hitDown.collider.gameObject.name}");
+                        break;
+
+                    case Constants.Tags.Water:
+                        player.GetComponent<Transform>().position = new Vector3(player.transform.position.x, player.transform.position.y, -1);
+                        player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 100);
+                        player.GetComponent<Rigidbody2D>().gravityScale = 8;
+                        player.GetComponent<BoxCollider2D>().enabled = false;
+                        player.GetComponent<PlayerController>().enabled = false;
+                        Die();
+                        Debug.Log($"{player.name} fell down the hole");
                         break;
 
                     default:
