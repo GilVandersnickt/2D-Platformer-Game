@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Controllers.Player;
-using Assets.Scripts.Entities;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Services;
 using UnityEngine;
@@ -19,8 +18,6 @@ namespace Assets.Scripts.Installers
             Container.Bind<IEnemyService>().To<EnemyService>().AsTransient();
             Container.Bind<ICameraService>().To<CameraService>().AsSingle();
             Container.Bind<IMenuService>().To<MenuService>().AsSingle();
-
-            Container.Bind<Player>().AsSingle();
 
             // Factory for instantiating a player
             Container.BindFactory<PlayerController, PlayerController.Factory>()

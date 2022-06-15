@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Interfaces
 {
