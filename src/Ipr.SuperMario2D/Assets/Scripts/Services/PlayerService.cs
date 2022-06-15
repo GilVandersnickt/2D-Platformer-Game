@@ -50,15 +50,15 @@ namespace Assets.Scripts.Services
 
             PlayerRaycast(playerRigidBody.gameObject);
 
-            if (playerRigidBody.gameObject.transform.position.y < -4)
+            if (playerRigidBody.gameObject.transform.position.y < Constants.Player.MaxDepth)
             {
                 Die();
             }
         }
-        public void TakeDamage()
+        public void TakeDamage(Animator playerAnimator)
         {
             GameController.Health -= Constants.Enemy.EnemyDamage;
-            //GetHurt();
+            GetHurt(playerAnimator);
         }
         public void TakeCoin()
         {
