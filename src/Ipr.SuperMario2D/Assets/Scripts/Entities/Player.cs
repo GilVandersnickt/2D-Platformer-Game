@@ -7,5 +7,6 @@ namespace Assets.Scripts.Entities
         public string Name;
         public int Health;
         public int NumberOfCoins;
+        public float TimeLeft;
     }
 }
