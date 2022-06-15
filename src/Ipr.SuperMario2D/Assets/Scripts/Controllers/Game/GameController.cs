@@ -69,7 +69,10 @@ namespace Assets.Scripts.Controllers.Game
         }
         public void GameOver()
         {
-            _gameService.GameOver(GameOverScreen);
+            if (Health <= 0)
+                _gameService.GameOver(GameOverScreen);
+            else
+                ReplayLevel(); 
         }
     }
 }
