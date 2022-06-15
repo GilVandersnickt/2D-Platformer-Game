@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Controllers.Game;
-using Assets.Scripts.Entities;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,9 +13,10 @@ namespace Assets.Scripts.Services
         public void Start()
         {
             timeLeft = PlayerPrefs.GetInt(Constants.PlayerPrefsTitles.SelectedTime, 0);
-            GameController.Score = 0;
-            GameController.Health = 2;
+            GameController.Score = Constants.Settings.ScoreStart;
+            GameController.Health = Constants.Settings.HealthStart;
             GameController.IsGameOver = false;
+            Time.timeScale = 1;
         }
 
         public void Play()
@@ -39,7 +39,7 @@ namespace Assets.Scripts.Services
         public void Replay(GameObject gameOverScreen)
         {
             gameOverScreen.SetActive(false);
-            Start();
+            Object.Destroy(GameObject.FindGameObjectWithTag(Constants.Tags.Player));
         }
 
         public void Menu()
@@ -69,7 +69,7 @@ namespace Assets.Scripts.Services
             // Check if game is over
             if (GameController.IsGameOver)
             {
-               gameOverScreen.SetActive(true);
+                gameOverScreen.SetActive(true);
             }
         }
 
