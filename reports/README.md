@@ -38,7 +38,9 @@
 - Game over wanneer de levens van de speler op 0 staan
 - Game over wanneer een speler in een put valt
 - Mogelijkheid om een spel te pauzeren (zonder dat de tijd verder loopt)
-- Mogelijkheid om tijdens een spel terug te keren naar het hoofdmenu
+- Een pauzescherm en gameoverscherm met de mogelijkheid om terug te keren naar het hoofdmenu
+- Een pauzescherm met de mogelijkheid om het spel te hervatten
+- Een gameoverscherm met de mogelijkheid om het spel te herstarten
 
 ## Opbouw
 - Ik heb ervoor gekozen om dit project op te splitsen in **controller** klassen en **service** klassen die gebruik maken van **interfaces**. Hierdoor wordt in de UI enkel gebruik gemaakt van controllers die achterliggend de nodige services raadplegen. 
