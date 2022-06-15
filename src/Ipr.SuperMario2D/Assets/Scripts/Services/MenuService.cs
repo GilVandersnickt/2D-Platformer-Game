@@ -8,7 +8,7 @@ namespace Assets.Scripts.Services
     {
         public void StartGame()
         {
-            SceneManager.LoadScene(Constants.Scenes.Level002);
+            SceneManager.LoadScene(Constants.Scenes.Level001);
         }
 
         public void GoToCharacterSelect()
