@@ -1,5 +1,7 @@
-﻿using Assets.Scripts.Controllers.Game;
+﻿using Assets.Scripts.Controllers.Enemy;
+using Assets.Scripts.Controllers.Game;
 using Assets.Scripts.Interfaces;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Services
@@ -10,28 +12,53 @@ namespace Assets.Scripts.Services
         private float direction = 0;
         private bool facingRight = true;
 
+        public void Collide(Collider2D collider)
+        {
+            switch (collider.gameObject.tag)
+            {
+                case "EndOfLevel":
+                    GameController.IsGameOver = true;
+                    Debug.Log($"{collider.gameObject.tag} reached");
+                    break;
+
+                case "Coin":
+                    TakeCoin();
+                    Object.Destroy(collider.gameObject);
+                    Debug.Log($"{collider.gameObject.tag} collected: +{Constants.Score.CoinValue} points");
+                    break;
+
+                default:
+                    break;
+            }
+        }
         public void Move(Rigidbody2D playerRigidBody, Animator playerAnimator, Transform groundCheck, LayerMask groundLayer)
         {
             direction = Input.GetAxis("Horizontal");
+            onGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && onGround)
             {
                 Jump(playerRigidBody);
             }
-
-            onGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
             AnimatePlayer(playerAnimator);
 
             playerRigidBody.velocity = new Vector2(direction * Constants.Player.PlayerSpeed, playerRigidBody.velocity.y);
 
             if (facingRight && direction < 0 || !facingRight && direction > 0)
-                FlipPlayer();
+                FlipPlayer(playerRigidBody.gameObject);
 
+            PlayerRaycast(playerRigidBody.gameObject);
+
+            if (playerRigidBody.gameObject.transform.position.y < -4)
+            {
+                Die();
+            }
         }
         public void TakeDamage()
         {
             GameController.Health -= Constants.Enemy.EnemyDamage;
+            //GetHurt();
         }
         public void TakeCoin()
         {
@@ -41,29 +68,70 @@ namespace Assets.Scripts.Services
         {
             GameController.Health = 0;
         }
-
         private void Jump(Rigidbody2D playerRigidBody)
         {
-            if (onGround)
-            {
-                playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, Constants.Player.PlayerJumpForce);
-            }
+            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, Constants.Player.PlayerJumpForce);
         }
         private void AnimatePlayer(Animator playerAnimator)
         {
-            //PlayerAnimator.SetBool("OnGround", OnGround);
-
-            if (direction != 0)
-                playerAnimator.SetBool("IsWalking", true);
-            else
-                playerAnimator.SetBool("IsWalking", false);
-
+            //PlayerAnimator.SetBool("OnGround", onGround);
+            playerAnimator.SetBool("IsWalking", direction != 0);
         }
-        private void FlipPlayer()
+        private void FlipPlayer(GameObject player)
         {
             facingRight = !facingRight;
-            //player.transform.localScale = new Vector2(player.transform.localScale.x * -1, player.transform.localScale.y);
+            player.transform.localScale = new Vector2(player.transform.localScale.x * -1, player.transform.localScale.y);
         }
+        private void PlayerRaycast(GameObject player)
+        {
+            RaycastHit2D hitUp = Physics2D.Raycast(player.transform.position, Vector2.up);
+            RaycastHit2D hitDown = Physics2D.Raycast(player.transform.position, Vector2.down);
+
+            if (hitUp.collider == null && hitDown.collider == null) return;
+
+            if (hitUp.collider != null && hitUp.distance < Constants.Player.PlayerBaseDistance)
+                switch (hitUp.collider.gameObject.tag)
+                {
+                    case Constants.Tags.Box:
+                        Debug.Log($"Headkicked {hitUp.collider.gameObject.tag}");
+                        Object.Destroy(hitUp.collider.gameObject);
+                        break;
+
+                    default:
+                        break;
+                }
+
+            if (hitDown.distance < Constants.Player.PlayerBaseDistance)
+                switch (hitDown.collider.gameObject.tag)
+                {
+                    case Constants.Tags.Ground:
+                        onGround = true;
+                        break;
+
+                    case Constants.Tags.Enemy:
+                        player.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 100);
+                        hitDown.collider.gameObject.GetComponent<Transform>().position = new Vector3(player.transform.position.x, player.transform.position.y, -1);
+                        hitDown.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 100);
+                        hitDown.collider.gameObject.GetComponent<Rigidbody2D>().gravityScale = 8;
+                        hitDown.collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                        hitDown.collider.gameObject.GetComponent<EnemyController>().enabled = false;
+                        Debug.Log($"{player.name} destroyed {hitDown.collider.gameObject.name}");
+                        break;
+
+                    default:
+                        break;
+                }
+
+        }
+        private IEnumerator GetHurt(Animator playerAnimator)
+        {
+            Physics2D.IgnoreLayerCollision(6, 8);
+            playerAnimator.SetLayerWeight(1, 1);
+            yield return new WaitForSeconds(3);
+            playerAnimator.SetLayerWeight(1, 0);
+            Physics2D.IgnoreLayerCollision(6, 8, false);
+        }
+
 
     }
 }
