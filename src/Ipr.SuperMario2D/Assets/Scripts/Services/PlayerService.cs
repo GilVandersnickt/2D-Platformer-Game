@@ -17,15 +17,21 @@ namespace Assets.Scripts.Services
         {
             switch (collider.gameObject.tag)
             {
-                case "EndOfLevel":
+                case Constants.Tags.EndOfLevel:
                     GameController.IsGameOver = true;
                     Debug.Log($"{collider.gameObject.tag} reached");
                     break;
 
-                case "Coin":
+                case Constants.Tags.Coin:
                     TakeCoin();
                     Object.Destroy(collider.gameObject);
                     Debug.Log($"{collider.gameObject.tag} collected: +{Constants.Score.CoinValue} points");
+                    break;
+
+                case Constants.Tags.Health:
+                    TakeHealthpack();
+                    Object.Destroy(collider.gameObject);
+                    Debug.Log($"{collider.gameObject.tag} collected: +{Constants.Player.HealthpackValue} health");
                     break;
 
                 default:
@@ -64,6 +70,11 @@ namespace Assets.Scripts.Services
         public void TakeCoin()
         {
             GameController.Score += Constants.Score.CoinValue;
+        }
+        public void TakeHealthpack()
+        {
+            if (GameController.Health < Constants.Player.MaxHealth)
+                GameController.Health += Constants.Player.HealthpackValue;
         }
         public void Die()
         {
