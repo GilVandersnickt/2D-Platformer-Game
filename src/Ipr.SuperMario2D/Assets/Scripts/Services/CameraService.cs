@@ -6,7 +6,7 @@ namespace Assets.Scripts.Services
     public class CameraService : ICameraService
     {
         private float xMin = 0;
-        private float xMax = 10;
+        private float xMax = Constants.Maps.XMax;
         private float yMin = 0;
         private float yMax = 0;
 
