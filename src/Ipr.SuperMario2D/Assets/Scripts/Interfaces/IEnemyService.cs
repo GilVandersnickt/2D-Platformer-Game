@@ -4,7 +4,6 @@ namespace Assets.Scripts.Interfaces
 {
     public interface IEnemyService
     {
-        public void SpawnEnemy(GameObject enemy);
-        public void SpawnEnemies(GameObject[] enemies);
+        public void Move(GameObject enemy);
     }
 }
