@@ -5166,8 +5166,8 @@ MonoBehaviour:
   EmptyHeart: {fileID: 21300000, guid: 031d8fef34c753140aa56bec12eeec4d, type: 3}
   Characters:
   - {fileID: 5823181552878756693, guid: 7a37628926afc9e49936a3cdf1cfa84f, type: 3}
-  - {fileID: 5823181552878756693, guid: 7a37628926afc9e49936a3cdf1cfa84f, type: 3}
-  - {fileID: 5823181552878756693, guid: 7a37628926afc9e49936a3cdf1cfa84f, type: 3}
+  - {fileID: 7417614301720737647, guid: 461277af56543b240832d1ebf838d0f4, type: 3}
+  - {fileID: 7968029911252962499, guid: aeb002c00078db445816991b6704c876, type: 3}
 --- !u!4 &1145543745
 Transform:
   m_ObjectHideFlags: 0
