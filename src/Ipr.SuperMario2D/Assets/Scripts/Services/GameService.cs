@@ -52,7 +52,6 @@ namespace Assets.Scripts.Services
             {
                 Time.timeScale = 0;
                 gameOverScreen.SetActive(true);
-                Debug.Log("Game Over");
             }
             else
             {
