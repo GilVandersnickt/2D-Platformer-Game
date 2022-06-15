@@ -11,6 +11,7 @@ TagManager:
   - Box
   - TimeLeft
   - Score
+  - Water
   layers:
   - Default
   - TransparentFX
