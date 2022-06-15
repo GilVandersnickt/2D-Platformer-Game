@@ -711,6 +711,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150060, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: playerPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396363578116150060, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: playerPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 935935854660891768, guid: 7a37628926afc9e49936a3cdf1cfa84f, type: 3}
+    - target: {fileID: 7396363578116150060, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: playerPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 935935854660891768, guid: 7a37628926afc9e49936a3cdf1cfa84f, type: 3}
+    - target: {fileID: 7396363578116150060, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: playerPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 935935854660891768, guid: 7a37628926afc9e49936a3cdf1cfa84f, type: 3}
     - target: {fileID: 7396363578116150063, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
       propertyPath: m_Name
       value: GameInstaller
