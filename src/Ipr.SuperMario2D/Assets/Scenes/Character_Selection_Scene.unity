@@ -722,11 +722,11 @@ PrefabInstance:
     - target: {fileID: 7396363578116150060, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
       propertyPath: playerPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 935935854660891768, guid: 7a37628926afc9e49936a3cdf1cfa84f, type: 3}
+      objectReference: {fileID: 4241736220176343106, guid: 461277af56543b240832d1ebf838d0f4, type: 3}
     - target: {fileID: 7396363578116150060, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
       propertyPath: playerPrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 935935854660891768, guid: 7a37628926afc9e49936a3cdf1cfa84f, type: 3}
+      objectReference: {fileID: 3654992749985569774, guid: aeb002c00078db445816991b6704c876, type: 3}
     - target: {fileID: 7396363578116150063, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
       propertyPath: m_Name
       value: GameInstaller
