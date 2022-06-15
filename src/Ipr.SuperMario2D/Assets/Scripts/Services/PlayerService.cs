@@ -1,7 +1,6 @@
 ﻿using Assets.Scripts.Controllers.Enemy;
 using Assets.Scripts.Controllers.Game;
 using Assets.Scripts.Interfaces;
-using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Services
@@ -12,33 +11,10 @@ namespace Assets.Scripts.Services
         private float direction = 0;
         private bool facingRight = true;
 
-        public void Collide(Collider2D collider)
-        {
-            switch (collider.gameObject.tag)
-            {
-                case Constants.Tags.EndOfLevel:
-                    GameController.IsGameOver = true;
-                    Debug.Log($"{collider.gameObject.tag} reached");
-                    break;
-
-                case Constants.Tags.Coin:
-                    TakeCoin();
-                    Object.Destroy(collider.gameObject);
-                    Debug.Log($"{collider.gameObject.tag} collected: +{Constants.Score.CoinValue} points");
-                    break;
-
-                case Constants.Tags.Health:
-                    TakeHealthpack();
-                    Object.Destroy(collider.gameObject);
-                    Debug.Log($"{collider.gameObject.tag} collected: +{Constants.Player.HealthpackValue} health");
-                    break;
-
-                default:
-                    break;
-            }
-        }
         public void Move(Rigidbody2D playerRigidBody, Animator playerAnimator, Transform groundCheck, LayerMask groundLayer)
         {
+            if (GameController.Health <= 0) return;
+
             direction = Input.GetAxis("Horizontal");
             onGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
@@ -63,6 +39,31 @@ namespace Assets.Scripts.Services
             if (playerRigidBody.gameObject.transform.position.y < Constants.Player.MaxDepth)
             {
                 Die();
+            }
+        }
+        public void Collide(Collider2D collider)
+        {
+            switch (collider.gameObject.tag)
+            {
+                case Constants.Tags.EndOfLevel:
+                    GameController.IsGameOver = true;
+                    Debug.Log($"{collider.gameObject.tag} reached");
+                    break;
+
+                case Constants.Tags.Coin:
+                    TakeCoin();
+                    Object.Destroy(collider.gameObject);
+                    Debug.Log($"{collider.gameObject.tag} collected: +{Constants.Score.CoinValue} points");
+                    break;
+
+                case Constants.Tags.Health:
+                    TakeHealthpack();
+                    Object.Destroy(collider.gameObject);
+                    Debug.Log($"{collider.gameObject.tag} collected: +{Constants.Player.HealthpackValue} health");
+                    break;
+
+                default:
+                    break;
             }
         }
         public void TakeDamage()
@@ -137,7 +138,7 @@ namespace Assets.Scripts.Services
                     case Constants.Tags.Water:
                         player.GetComponent<Transform>().position = new Vector3(player.transform.position.x, player.transform.position.y, -1);
                         Die();
-                        Debug.Log($"{player.name} fell down the hole");
+                        Debug.Log($"{player.name} fell down");
                         break;
 
                     default:
