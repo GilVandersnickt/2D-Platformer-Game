@@ -40,6 +40,7 @@ namespace Assets.Scripts.Services
 
         private void CheckColliders(GameObject gameObject)
         {
+            // Check for colliders in moving direction
             RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(xMoveDirection, 0));
             if (hit.distance > hitDistance) return;
             switch (hit.collider.tag)
