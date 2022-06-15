@@ -40,7 +40,7 @@ namespace Assets.Scripts.Services
         public void Replay(GameObject gameOverScreen)
         {
             gameOverScreen.SetActive(false);
-            Object.Destroy(GameObject.FindGameObjectWithTag(Constants.Tags.Player));
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         public void Menu()
