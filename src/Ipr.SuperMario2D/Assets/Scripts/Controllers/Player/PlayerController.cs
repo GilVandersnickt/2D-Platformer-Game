@@ -34,5 +34,9 @@ namespace Assets.Scripts.Controllers.Player
         {
             _playerService.Collide(collider);
         }
+        public void TakeDamage(Animator playerAnimator)
+        {
+            _playerService.TakeDamage(playerAnimator);
+        }
     }
 }
