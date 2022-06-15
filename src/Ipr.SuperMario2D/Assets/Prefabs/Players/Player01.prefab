@@ -195,9 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd74bf5df08e5645a1c207736a206f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoinValue: 10
   OnGround: 0
-  PlayerBaseDistance: 0
   FacingRight: 1
   CheckOnGround: {fileID: 3041978448287888344}
   GroundLayer:
@@ -205,4 +203,3 @@ MonoBehaviour:
     m_Bits: 128
   PlayerRigidBody: {fileID: 5823181552878756692}
   PlayerAnimator: {fileID: 5823181552878756697}
-  CurrentPlayer: {fileID: 0}
