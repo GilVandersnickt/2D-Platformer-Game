@@ -52,7 +52,6 @@ namespace Assets.Scripts.Controllers.Game
         public void ReplayLevel()
         {
             _gameService.Replay(GameOverScreen);
-            Awake();
         }
 
         public void PauseGame()
@@ -72,7 +71,7 @@ namespace Assets.Scripts.Controllers.Game
             if (Health <= 0)
                 _gameService.GameOver(GameOverScreen);
             else
-                ReplayLevel(); 
+                ReplayLevel(); // Temporary
         }
     }
 }
