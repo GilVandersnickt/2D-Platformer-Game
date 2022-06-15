@@ -41,17 +41,21 @@ namespace Assets.Scripts.Services
         private void CheckColliders(GameObject gameObject)
         {
             // Check for colliders in moving direction
-            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, new Vector2(xMoveDirection, 0));
-            if (hit.distance > hitDistance) return;
-            switch (hit.collider.tag)
+            RaycastHit2D hitFront = Physics2D.Raycast(gameObject.transform.position, new Vector2(xMoveDirection, 0));
+            if (hitFront.distance > hitDistance) return;
+            switch (hitFront.collider.tag)
             {
                 case Constants.Tags.Ground:
                     Flip(gameObject);
                     break;
 
+                case Constants.Tags.Enemy:
+                    Flip(gameObject);
+                    break;
+
                 case Constants.Tags.Player:
-                    hit.collider.GetComponent<PlayerController>().TakeDamage();
-                    Debug.Log($"{hit.collider.name} got hit by {gameObject.name}! {GameController.Health} lives left");
+                    hitFront.collider.GetComponent<PlayerController>().TakeDamage();
+                    Debug.Log($"{hitFront.collider.name} got hit by {gameObject.name}! {GameController.Health} lives left");
                     Flip(gameObject);
                     break;
 
