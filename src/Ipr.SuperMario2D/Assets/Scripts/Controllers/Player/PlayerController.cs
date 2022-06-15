@@ -1,7 +1,4 @@
-﻿using Assets.Scripts.Controllers.Enemy;
-using Assets.Scripts.Controllers.Game;
-using Assets.Scripts.Interfaces;
-using Assets.Scripts.Services;
+﻿using Assets.Scripts.Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -21,7 +18,7 @@ namespace Assets.Scripts.Controllers.Player
         {
             _playerService = playerService;
         }
-        
+
         public class Factory : PlaceholderFactory<PlayerController> { }
 
         void Update()
@@ -32,9 +29,9 @@ namespace Assets.Scripts.Controllers.Player
         {
             _playerService.Collide(collider);
         }
-        public void TakeDamage(Animator playerAnimator)
+        public void TakeDamage()
         {
-            _playerService.TakeDamage(playerAnimator);
+            _playerService.TakeDamage();
         }
     }
 }

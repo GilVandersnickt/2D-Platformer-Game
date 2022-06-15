@@ -50,7 +50,7 @@ namespace Assets.Scripts.Services
                     break;
 
                 case Constants.Tags.Player:
-                    hit.collider.GetComponent<PlayerController>().TakeDamage(hit.collider.GetComponent<Animator>());
+                    hit.collider.GetComponent<PlayerController>().TakeDamage();
                     Debug.Log($"{hit.collider.name} got hit by {gameObject.name}! {GameController.Health} lives left");
                     Flip(gameObject);
                     break;

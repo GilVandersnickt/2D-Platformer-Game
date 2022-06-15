@@ -6,7 +6,7 @@ namespace Assets.Scripts.Interfaces
     {
         public void Move(Rigidbody2D playerRigidBody, Animator playerAnimator, Transform groundCheck, LayerMask groundLayer);
         public void TakeCoin();
-        public void TakeDamage(Animator playerAnimator);
+        public void TakeDamage();
         public void Die();
         public void Collide(Collider2D collider);
     }

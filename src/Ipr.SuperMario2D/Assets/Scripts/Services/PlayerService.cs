@@ -65,10 +65,9 @@ namespace Assets.Scripts.Services
                 Die();
             }
         }
-        public void TakeDamage(Animator playerAnimator)
+        public void TakeDamage()
         {
             GameController.Health -= Constants.Enemy.EnemyDamage;
-            GetHurt(playerAnimator);
         }
         public void TakeCoin()
         {
@@ -146,16 +145,5 @@ namespace Assets.Scripts.Services
                 }
 
         }
-        private IEnumerator GetHurt(Animator playerAnimator)
-        {
-            // Make player invincible for 3 seconds after taking damage
-            Physics2D.IgnoreLayerCollision(6, 8);
-            playerAnimator.SetLayerWeight(1, 1);
-            yield return new WaitForSeconds(3);
-            playerAnimator.SetLayerWeight(1, 0);
-            Physics2D.IgnoreLayerCollision(6, 8, false);
-        }
-
-
     }
 }
