@@ -1,4 +1,3 @@
-using Assets.Scripts.Constants;
 using Assets.Scripts.Controllers.Player;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
@@ -24,6 +23,7 @@ namespace Assets.Scripts.Controllers.Game
         public static int Health;
         public static int Score;
         public static bool IsGameOver;
+
         [Inject]
         PlayerController.Factory playerControllerFactory;
 
@@ -36,14 +36,7 @@ namespace Assets.Scripts.Controllers.Game
 
         private void Awake()
         {
-            int characterIndex = PlayerPrefs.GetInt(PlayerPrefsTitles.SelectedCharacter, 0) - 1;
-
             var player = playerControllerFactory.Create();
-            Debug.Log("test gamecontroller factory");
-            Debug.Log(player);
-            
-            //Instantiate(Characters[characterIndex], new Vector2(-3, 0), Quaternion.identity);
-
             _gameService.Start();
             PauseGame();
             ResumeGame();
@@ -52,13 +45,17 @@ namespace Assets.Scripts.Controllers.Game
         void Update()
         {
             _gameService.Play();
-            _gameService.UpdateData(Score, Health);
             _gameService.UpdateUI(TimeLeftUI, ScoreUI, GameOverScreen, HeartsUI, EmptyHeart, FullHeart);
+
+            if (IsGameOver)
+                GameOver();
         }
 
         public void ReplayLevel()
         {
-            _gameService.Replay();
+            _gameService.Replay(GameOverScreen);
+            PauseGame();
+            ResumeGame();
         }
 
         public void PauseGame()
@@ -72,6 +69,10 @@ namespace Assets.Scripts.Controllers.Game
         public void GoToMenu()
         {
             _gameService.Menu();
+        }
+        public void GameOver()
+        {
+            _gameService.GameOver(GameOverScreen);
         }
     }
 }
