@@ -16,7 +16,7 @@ namespace Assets.Scripts.Installers
             // IOC
             Container.Bind<IGameService>().To<GameService>().AsSingle();
             Container.Bind<IPlayerService>().To<PlayerService>().AsSingle();
-            Container.Bind<IEnemyService>().To<EnemyService>().AsSingle();
+            Container.Bind<IEnemyService>().To<EnemyService>().AsTransient();
             Container.Bind<ICameraService>().To<CameraService>().AsSingle();
             Container.Bind<IMenuService>().To<MenuService>().AsSingle();
 
