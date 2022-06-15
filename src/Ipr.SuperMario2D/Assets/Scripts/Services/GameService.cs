@@ -48,8 +48,17 @@ namespace Assets.Scripts.Services
         }
         public void GameOver(GameObject gameOverScreen)
         {
-            Time.timeScale = 0;
-            gameOverScreen.SetActive(true);
+            if(GameController.Health <= 0)
+            {
+                Time.timeScale = 0;
+                gameOverScreen.SetActive(true);
+                Debug.Log("Game Over");
+            }
+            else
+            {
+                gameOverScreen.SetActive(false);
+                SceneManager.LoadScene(Constants.Scenes.Level002);
+            }
         }
 
         public void UpdateUI(GameObject timeObject, GameObject scoreObject, GameObject gameOverScreen, Image[] hearts, Sprite emptyHeart, Sprite fullHeart)
