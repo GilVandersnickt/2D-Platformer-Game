@@ -11,8 +11,6 @@ namespace Assets.Scripts.Controllers.Player
     {
         private IPlayerService _playerService;
 
-        public bool OnGround;
-        public bool FacingRight = true;
         public Transform CheckOnGround;
         public LayerMask GroundLayer;
         public Rigidbody2D PlayerRigidBody;
