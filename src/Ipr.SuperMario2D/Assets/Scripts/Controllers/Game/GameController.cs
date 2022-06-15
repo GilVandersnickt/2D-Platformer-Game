@@ -9,7 +9,6 @@ namespace Assets.Scripts.Controllers.Game
     public class GameController : MonoBehaviour
     {
         private IGameService _gameService;
-        private IPlayerService _playerService;
 
         public GameObject GameOverScreen;
         public GameObject PauseScreen;
@@ -28,15 +27,14 @@ namespace Assets.Scripts.Controllers.Game
         PlayerController.Factory playerControllerFactory;
 
         [Inject]
-        public void Construct(IGameService gameService, IPlayerService playerService)
+        public void Construct(IGameService gameService)
         {
             _gameService = gameService;
-            _playerService = playerService;
         }
 
         private void Awake()
         {
-            var player = playerControllerFactory.Create();
+            playerControllerFactory.Create();
             _gameService.Start();
             PauseGame();
             ResumeGame();
@@ -54,8 +52,7 @@ namespace Assets.Scripts.Controllers.Game
         public void ReplayLevel()
         {
             _gameService.Replay(GameOverScreen);
-            PauseGame();
-            ResumeGame();
+            Awake();
         }
 
         public void PauseGame()
