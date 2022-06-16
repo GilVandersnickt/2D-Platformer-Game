@@ -6,7 +6,7 @@ namespace Assets.Scripts.Interfaces
     public interface IPlayerService
     {
         public void Play();
-        public void Move(Rigidbody2D playerRigidBody, Animator playerAnimator, Transform groundCheck, LayerMask groundLayer);
+        public void Move(PlayerUI playerUI);
         public void TakeCoin();
         public void TakeDamage();
         public void Die();

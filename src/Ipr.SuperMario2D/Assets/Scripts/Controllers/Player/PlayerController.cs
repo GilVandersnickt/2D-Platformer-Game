@@ -8,7 +8,7 @@ namespace Assets.Scripts.Controllers.Player
     {
         private IPlayerService _playerService;
 
-        public Transform CheckOnGround;
+        public Transform GroundCheck;
         public LayerMask GroundLayer;
         public Rigidbody2D PlayerRigidBody;
         public Animator PlayerAnimator;
@@ -23,7 +23,7 @@ namespace Assets.Scripts.Controllers.Player
 
         void Update()
         {
-            _playerService.Move(PlayerRigidBody, PlayerAnimator, CheckOnGround, GroundLayer);
+            _playerService.Move(GetPlayerUI());
         }
         void OnTriggerEnter2D(Collider2D collider)
         {
@@ -36,6 +36,16 @@ namespace Assets.Scripts.Controllers.Player
         public Entities.Player GetPlayer()
         {
             return _playerService.GetPlayer();
+        }
+        public Entities.PlayerUI GetPlayerUI()
+        {
+            return new Entities.PlayerUI
+            {
+                PlayerRigidBody = PlayerRigidBody,
+                PlayerAnimator = PlayerAnimator,
+                GroundCheck = GroundCheck,
+                GroundLayer = GroundLayer
+            };
         }
     }
 }

@@ -17,7 +17,6 @@ namespace Assets.Scripts.Services
             SetPlayer();
         }
 
-        #region Activity
         public void Play()
         {
             player.TimeLeft -= Time.deltaTime;
@@ -34,8 +33,91 @@ namespace Assets.Scripts.Services
             player.IsGameOver = true;
             Debug.Log("Player died");
         }
-        #endregion
-        #region Player
+        public void TakeDamage()
+        {
+            player.Health -= Constants.Enemy.EnemyDamage;
+        }
+        public void TakeCoin()
+        {
+            player.Score += Constants.Score.CoinValue;
+            Debug.Log($"+{Constants.Score.CoinValue} points");
+        }
+        public void TakeHealthpack()
+        {
+            if (player.Health < Constants.Player.MaxHealth)
+            {
+                player.Health += Constants.Player.HealthpackValue;
+                Debug.Log($"+{Constants.Player.HealthpackValue} health");
+            }
+            else
+            {
+                Debug.Log($"Max health achieved");
+            }
+        }
+        public void Move(PlayerUI playerUI)
+        {
+            if (player.Health <= 0) return;
+
+            direction = Input.GetAxis("Horizontal");
+            onGround = Physics2D.OverlapCircle(playerUI.GroundCheck.position, 0.1f, playerUI.GroundLayer);
+
+            // Jump when player is on ground and jump button is pressed
+            if (Input.GetButtonDown("Jump") && onGround)
+            {
+                Jump(playerUI.PlayerRigidBody);
+            }
+            playerUI.PlayerRigidBody.velocity = new Vector2(direction * Constants.Player.PlayerSpeed, playerUI.PlayerRigidBody.velocity.y);
+
+            // Animation
+            AnimatePlayer(playerUI.PlayerAnimator);
+
+            // Flip player
+            if (facingRight && direction < 0 || !facingRight && direction > 0)
+                FlipPlayer(playerUI.PlayerRigidBody.gameObject);
+
+            // Check if player is colliding
+            PlayerRaycast(playerUI.PlayerRigidBody.gameObject);
+
+            // Die when falling lower than max depth
+            if (playerUI.PlayerRigidBody.gameObject.transform.position.y < Constants.Player.MaxDepth)
+            {
+                Die();
+            }
+        }
+        public void Collide(Collider2D collider)
+        {
+            switch (collider.gameObject.tag)
+            {
+                // Collide with end of level
+                case Constants.Tags.EndOfLevel:
+                    player.IsGameOver = true;
+                    Debug.Log($"{collider.gameObject.tag} reached");
+                    break;
+                // Collide with coin
+                case Constants.Tags.Coin:
+                    TakeCoin();
+                    Object.Destroy(collider.gameObject);
+                    Debug.Log($"{collider.gameObject.tag} collected");
+                    break;
+                // Collide with health
+                case Constants.Tags.Health:
+                    TakeHealthpack();
+                    Object.Destroy(collider.gameObject);
+                    Debug.Log($"{collider.gameObject.tag} collected");
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        public Player GetPlayer()
+        {
+            return player;
+        }
+        public void SetPlayer(Player player)
+        {
+            this.player = player;
+        }
         public void SetPlayer()
         {
             player = new Player
@@ -46,72 +128,7 @@ namespace Assets.Scripts.Services
                 IsGameOver = false
             };
         }
-        public void SetPlayer(Player player)
-        {
-            this.player = player;
-        }
-        public Player GetPlayer()
-        {
-            return player;
-        }
-        #endregion
         #region Movement
-        public void Move(Rigidbody2D playerRigidBody, Animator playerAnimator, Transform groundCheck, LayerMask groundLayer)
-        {
-            //if (GameController.Health <= 0) return;
-            if (player.Health <= 0) return;
-
-            direction = Input.GetAxis("Horizontal");
-            onGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
-
-            // Jump when player is on ground and jump button is pressed
-            if (Input.GetButtonDown("Jump") && onGround)
-            {
-                Jump(playerRigidBody);
-            }
-            playerRigidBody.velocity = new Vector2(direction * Constants.Player.PlayerSpeed, playerRigidBody.velocity.y);
-
-            // Animation
-            AnimatePlayer(playerAnimator);
-
-            // Flip player
-            if (facingRight && direction < 0 || !facingRight && direction > 0)
-                FlipPlayer(playerRigidBody.gameObject);
-
-            // Check if player is colliding
-            PlayerRaycast(playerRigidBody.gameObject);
-
-            // Die when falling lower than max depth
-            if (playerRigidBody.gameObject.transform.position.y < Constants.Player.MaxDepth)
-            {
-                Die();
-            }
-        }
-        public void Collide(Collider2D collider)
-        {
-            switch (collider.gameObject.tag)
-            {
-                case Constants.Tags.EndOfLevel:
-                    player.IsGameOver = true;
-                    Debug.Log($"{collider.gameObject.tag} reached");
-                    break;
-
-                case Constants.Tags.Coin:
-                    TakeCoin();
-                    Object.Destroy(collider.gameObject);
-                    Debug.Log($"{collider.gameObject.tag} collected: +{Constants.Score.CoinValue} points");
-                    break;
-
-                case Constants.Tags.Health:
-                    TakeHealthpack();
-                    Object.Destroy(collider.gameObject);
-                    Debug.Log($"{collider.gameObject.tag} collected: +{Constants.Player.HealthpackValue} health");
-                    break;
-
-                default:
-                    break;
-            }
-        }
         private void PlayerRaycast(GameObject playerObject)
         {
             RaycastHit2D hitUp = Physics2D.Raycast(playerObject.transform.position, Vector2.up);
@@ -169,22 +186,6 @@ namespace Assets.Scripts.Services
         {
             facingRight = !facingRight;
             playerObject.transform.localScale = new Vector2(playerObject.transform.localScale.x * -1, playerObject.transform.localScale.y);
-        }
-
-        #endregion
-        #region Actions
-        public void TakeDamage()
-        {
-            player.Health -= Constants.Enemy.EnemyDamage;
-        }
-        public void TakeCoin()
-        {
-            player.Score += Constants.Score.CoinValue;
-        }
-        public void TakeHealthpack()
-        {
-            if (player.Health < Constants.Player.MaxHealth)
-                player.Health += Constants.Player.HealthpackValue;
         }
         #endregion
         #region Animation
