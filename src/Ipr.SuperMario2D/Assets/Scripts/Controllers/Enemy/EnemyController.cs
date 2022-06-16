@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Controllers.Game;
-using Assets.Scripts.Controllers.Player;
-using Assets.Scripts.Interfaces;
+﻿using Assets.Scripts.Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -15,7 +13,6 @@ namespace Assets.Scripts.Controllers.Enemy
         {
             _enemyService = enemyService;
         }
-
 
         void Update()
         {
