@@ -660,7 +660,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &471564969
+--- !u!1001 &437590587
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -712,6 +712,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7396363578116150060, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: PlayerPrefab
+      value: 
+      objectReference: {fileID: 5823181552878756693, guid: 7a37628926afc9e49936a3cdf1cfa84f, type: 3}
+    - target: {fileID: 7396363578116150060, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 935935854660891768, guid: 7a37628926afc9e49936a3cdf1cfa84f, type: 3}
+    - target: {fileID: 7396363578116150060, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
       propertyPath: playerPrefabs.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -729,7 +737,7 @@ PrefabInstance:
       objectReference: {fileID: 3654992749985569774, guid: aeb002c00078db445816991b6704c876, type: 3}
     - target: {fileID: 7396363578116150063, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
       propertyPath: m_Name
-      value: GameInstaller
+      value: SceneContext
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69b66e6bfb0f2c245a3252e0a9f70331, type: 3}
