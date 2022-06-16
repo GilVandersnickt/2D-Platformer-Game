@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Controllers.Game;
-using Assets.Scripts.Interfaces;
+﻿using Assets.Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,21 +7,23 @@ namespace Assets.Scripts.Services
 {
     public class GameService : IGameService
     {
-        private float timeLeft;
+        private IPlayerService _playerService;
+
+        public GameService(IPlayerService playerService)
+        {
+            _playerService = playerService;
+        }
 
         public void Start()
         {
-            timeLeft = PlayerPrefs.GetInt(Constants.PlayerPrefsTitles.SelectedTime, 0);
-            GameController.Score = Constants.Settings.ScoreStart;
-            GameController.Health = Constants.Settings.HealthStart;
-            GameController.IsGameOver = false;
+            _playerService.SetPlayer();
             Time.timeScale = 1;
         }
 
         public void Play()
         {
-            timeLeft -= Time.deltaTime;
-            CheckGameState();
+            if (!_playerService.GetPlayer().IsGameOver)
+                _playerService.Play();
         }
 
         public void Pause(GameObject pauseScreen)
@@ -48,7 +49,7 @@ namespace Assets.Scripts.Services
         }
         public void GameOver(GameObject gameOverScreen)
         {
-            if(GameController.Health <= 0)
+            if (_playerService.GetPlayer().Health <= 0)
             {
                 Time.timeScale = 0;
                 gameOverScreen.SetActive(true);
@@ -63,30 +64,21 @@ namespace Assets.Scripts.Services
         public void UpdateUI(GameObject timeObject, GameObject scoreObject, GameObject gameOverScreen, Image[] hearts, Sprite emptyHeart, Sprite fullHeart)
         {
             // Update UI for time and score 
-            timeObject.gameObject.GetComponent<Text>().text = $"{Constants.UserInterface.TimeLeftText}{(int)timeLeft}";
-            scoreObject.gameObject.GetComponent<Text>().text = $"{Constants.UserInterface.ScoreText}{GameController.Score}";
+            timeObject.gameObject.GetComponent<Text>().text = $"{Constants.UserInterface.TimeLeftText}{(int)_playerService.GetPlayer().TimeLeft}";
+            scoreObject.gameObject.GetComponent<Text>().text = $"{Constants.UserInterface.ScoreText}{_playerService.GetPlayer().Score}";
             // Update UI for health 
             foreach (Image img in hearts)
             {
                 img.sprite = emptyHeart;
             }
-            for (int i = 0; i < GameController.Health; i++)
+            for (int i = 0; i < _playerService.GetPlayer().Health; i++)
             {
                 hearts[i].sprite = fullHeart;
             }
             // Check if game is over
-            if (GameController.IsGameOver)
+            if (_playerService.GetPlayer().IsGameOver)
             {
                 gameOverScreen.SetActive(true);
-            }
-        }
-
-        private void CheckGameState()
-        {
-            if (timeLeft <= 0f || GameController.Health <= 0)
-            {
-                Time.timeScale = 0;
-                GameController.IsGameOver = true;
             }
         }
     }
