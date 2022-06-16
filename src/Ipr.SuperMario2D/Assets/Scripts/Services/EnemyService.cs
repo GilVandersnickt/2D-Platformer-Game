@@ -49,6 +49,7 @@ namespace Assets.Scripts.Services
                     break;
 
                 case Constants.Tags.Player:
+                    if (hitFront.collider.GetComponent<PlayerController>().GetPlayer().IsGameOver) return;
                     hitFront.collider.GetComponent<PlayerController>().TakeDamage();
                     Debug.Log($"{hitFront.collider.name} got bitten by {gameObject.name}");
                     Flip(gameObject);
