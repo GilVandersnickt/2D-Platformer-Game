@@ -8,5 +8,6 @@
         public const int MaxDepth = -10;
         public const int HealthpackValue = 1;
         public const int MaxHealth = 3;
+        public const int DefaultTimeLeft = 100;
     }
 }
