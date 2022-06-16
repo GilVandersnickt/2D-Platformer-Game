@@ -33,5 +33,9 @@ namespace Assets.Scripts.Controllers.Player
         {
             _playerService.TakeDamage();
         }
+        public Entities.Player GetPlayer()
+        {
+            return _playerService.GetPlayer();
+        }
     }
 }
