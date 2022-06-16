@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Controllers.Enemy;
-using Assets.Scripts.Controllers.Game;
 using Assets.Scripts.Entities;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
