@@ -30,23 +30,27 @@ namespace Assets.Scripts.Services
         {
             Time.timeScale = 0;
             pauseScreen.SetActive(true);
+            Debug.Log("Game paused");
         }
 
         public void Resume(GameObject pauseScreen)
         {
             Time.timeScale = 1;
             pauseScreen.SetActive(false);
+            Debug.Log("Game resumed");
         }
         public void Replay(GameObject gameOverScreen)
         {
             gameOverScreen.SetActive(false);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("Game restarted");
         }
 
         public void Menu()
         {
             SceneManager.LoadScene(Constants.Scenes._MainMenu);
         }
+
         public void GameOver(GameObject gameOverScreen)
         {
             if (_playerService.GetPlayer().Health <= 0)
@@ -58,6 +62,7 @@ namespace Assets.Scripts.Services
             {
                 gameOverScreen.SetActive(false);
                 SceneManager.LoadScene(Constants.Scenes.Level002);
+                Debug.Log($"Next level: {SceneManager.GetActiveScene().name}");
             }
         }
 
