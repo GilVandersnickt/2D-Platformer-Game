@@ -12,6 +12,7 @@ namespace Assets.Scripts.Services
         {
             xMoveDirection = Constants.Enemy.XMoveDirection;
         }
+
         public void Move(GameObject gameObject)
         {
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(xMoveDirection, 0) * Constants.Enemy.EnemySpeed;
@@ -21,6 +22,7 @@ namespace Assets.Scripts.Services
 
             CheckColliders(gameObject);
         }
+
         private void Flip(GameObject gameObject)
         {
             if (xMoveDirection > 0)
