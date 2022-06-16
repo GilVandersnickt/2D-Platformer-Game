@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Controllers.Enemy;
 using Assets.Scripts.Controllers.Game;
+using Assets.Scripts.Entities;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
 
@@ -7,13 +8,49 @@ namespace Assets.Scripts.Services
 {
     public class PlayerService : IPlayerService
     {
+        private Player player;
+
         private bool onGround;
         private float direction = 0;
         private bool facingRight = true;
 
+        public PlayerService()
+        {
+            SetPlayer();
+        }
+
+        public void Play()
+        {
+            player.TimeLeft -= Time.deltaTime;
+
+            if (player.TimeLeft <= 0f || player.Health <= 0)
+            {
+                Time.timeScale = 0;
+                Die();
+            }
+        }
+        public void SetPlayer()
+        {
+            player = new Player
+            {
+                Health = Constants.Player.MaxHealth,
+                Score = 0,
+                TimeLeft = PlayerPrefs.GetInt(Constants.PlayerPrefsTitles.SelectedTime, Constants.Player.DefaultTimeLeft),
+                IsGameOver = false
+            };
+        }
+        public void SetPlayer(Player player)
+        {
+            this.player = player;
+        }
+        public Player GetPlayer()
+        {
+            return player;
+        }
         public void Move(Rigidbody2D playerRigidBody, Animator playerAnimator, Transform groundCheck, LayerMask groundLayer)
         {
-            if (GameController.Health <= 0) return;
+            //if (GameController.Health <= 0) return;
+            if (player.Health <= 0) return;
 
             direction = Input.GetAxis("Horizontal");
             onGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
@@ -46,7 +83,7 @@ namespace Assets.Scripts.Services
             switch (collider.gameObject.tag)
             {
                 case Constants.Tags.EndOfLevel:
-                    GameController.IsGameOver = true;
+                    player.IsGameOver = true;
                     Debug.Log($"{collider.gameObject.tag} reached");
                     break;
 
@@ -68,20 +105,22 @@ namespace Assets.Scripts.Services
         }
         public void TakeDamage()
         {
-            GameController.Health -= Constants.Enemy.EnemyDamage;
+            player.Health -= Constants.Enemy.EnemyDamage;
         }
         public void TakeCoin()
         {
-            GameController.Score += Constants.Score.CoinValue;
+            player.Score += Constants.Score.CoinValue;
         }
         public void TakeHealthpack()
         {
-            if (GameController.Health < Constants.Player.MaxHealth)
-                GameController.Health += Constants.Player.HealthpackValue;
+            if (player.Health < Constants.Player.MaxHealth)
+                player.Health += Constants.Player.HealthpackValue;
         }
         public void Die()
         {
-            GameController.Health = 0;
+            player.Health = 0;
+            player.IsGameOver = true;
+            Debug.Log("Player died");
         }
         private void Jump(Rigidbody2D playerRigidBody)
         {
@@ -92,15 +131,15 @@ namespace Assets.Scripts.Services
             //PlayerAnimator.SetBool("OnGround", onGround);
             playerAnimator.SetBool("IsWalking", direction != 0);
         }
-        private void FlipPlayer(GameObject player)
+        private void FlipPlayer(GameObject playerObject)
         {
             facingRight = !facingRight;
-            player.transform.localScale = new Vector2(player.transform.localScale.x * -1, player.transform.localScale.y);
+            playerObject.transform.localScale = new Vector2(playerObject.transform.localScale.x * -1, playerObject.transform.localScale.y);
         }
-        private void PlayerRaycast(GameObject player)
+        private void PlayerRaycast(GameObject playerObject)
         {
-            RaycastHit2D hitUp = Physics2D.Raycast(player.transform.position, Vector2.up);
-            RaycastHit2D hitDown = Physics2D.Raycast(player.transform.position, Vector2.down);
+            RaycastHit2D hitUp = Physics2D.Raycast(playerObject.transform.position, Vector2.up);
+            RaycastHit2D hitDown = Physics2D.Raycast(playerObject.transform.position, Vector2.down);
 
             if (hitUp.collider == null && hitDown.collider == null) return;
 
@@ -126,19 +165,19 @@ namespace Assets.Scripts.Services
                         break;
 
                     case Constants.Tags.Enemy:
-                        player.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 100);
-                        hitDown.collider.gameObject.GetComponent<Transform>().position = new Vector3(player.transform.position.x, player.transform.position.y, -1);
+                        playerObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 100);
+                        hitDown.collider.gameObject.GetComponent<Transform>().position = new Vector3(playerObject.transform.position.x, playerObject.transform.position.y, -1);
                         hitDown.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 100);
                         hitDown.collider.gameObject.GetComponent<Rigidbody2D>().gravityScale = 8;
                         hitDown.collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                         hitDown.collider.gameObject.GetComponent<EnemyController>().enabled = false;
-                        Debug.Log($"{player.name} destroyed {hitDown.collider.gameObject.name}");
+                        Debug.Log($"{playerObject.name} destroyed {hitDown.collider.gameObject.name}");
                         break;
 
                     case Constants.Tags.Water:
-                        player.GetComponent<Transform>().position = new Vector3(player.transform.position.x, player.transform.position.y, -1);
+                        playerObject.GetComponent<Transform>().position = new Vector3(playerObject.transform.position.x, playerObject.transform.position.y, -1);
                         Die();
-                        Debug.Log($"{player.name} fell down");
+                        Debug.Log($"{playerObject.name} fell down");
                         break;
 
                     default:
