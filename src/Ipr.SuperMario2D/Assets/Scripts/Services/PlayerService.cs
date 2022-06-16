@@ -8,7 +8,6 @@ namespace Assets.Scripts.Services
     public class PlayerService : IPlayerService
     {
         private Player player;
-
         private bool onGround;
         private float direction = 0;
         private bool facingRight = true;
@@ -18,6 +17,7 @@ namespace Assets.Scripts.Services
             SetPlayer();
         }
 
+        #region Activity
         public void Play()
         {
             player.TimeLeft -= Time.deltaTime;
@@ -28,6 +28,14 @@ namespace Assets.Scripts.Services
                 Die();
             }
         }
+        public void Die()
+        {
+            player.Health = 0;
+            player.IsGameOver = true;
+            Debug.Log("Player died");
+        }
+        #endregion
+        #region Player
         public void SetPlayer()
         {
             player = new Player
@@ -46,6 +54,8 @@ namespace Assets.Scripts.Services
         {
             return player;
         }
+        #endregion
+        #region Movement
         public void Move(Rigidbody2D playerRigidBody, Animator playerAnimator, Transform groundCheck, LayerMask groundLayer)
         {
             //if (GameController.Health <= 0) return;
@@ -102,39 +112,6 @@ namespace Assets.Scripts.Services
                     break;
             }
         }
-        public void TakeDamage()
-        {
-            player.Health -= Constants.Enemy.EnemyDamage;
-        }
-        public void TakeCoin()
-        {
-            player.Score += Constants.Score.CoinValue;
-        }
-        public void TakeHealthpack()
-        {
-            if (player.Health < Constants.Player.MaxHealth)
-                player.Health += Constants.Player.HealthpackValue;
-        }
-        public void Die()
-        {
-            player.Health = 0;
-            player.IsGameOver = true;
-            Debug.Log("Player died");
-        }
-        private void Jump(Rigidbody2D playerRigidBody)
-        {
-            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, Constants.Player.PlayerJumpForce);
-        }
-        private void AnimatePlayer(Animator playerAnimator)
-        {
-            //PlayerAnimator.SetBool("OnGround", onGround);
-            playerAnimator.SetBool("IsWalking", direction != 0);
-        }
-        private void FlipPlayer(GameObject playerObject)
-        {
-            facingRight = !facingRight;
-            playerObject.transform.localScale = new Vector2(playerObject.transform.localScale.x * -1, playerObject.transform.localScale.y);
-        }
         private void PlayerRaycast(GameObject playerObject)
         {
             RaycastHit2D hitUp = Physics2D.Raycast(playerObject.transform.position, Vector2.up);
@@ -184,5 +161,38 @@ namespace Assets.Scripts.Services
                 }
 
         }
+        private void Jump(Rigidbody2D playerRigidBody)
+        {
+            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, Constants.Player.PlayerJumpForce);
+        }
+        private void FlipPlayer(GameObject playerObject)
+        {
+            facingRight = !facingRight;
+            playerObject.transform.localScale = new Vector2(playerObject.transform.localScale.x * -1, playerObject.transform.localScale.y);
+        }
+
+        #endregion
+        #region Actions
+        public void TakeDamage()
+        {
+            player.Health -= Constants.Enemy.EnemyDamage;
+        }
+        public void TakeCoin()
+        {
+            player.Score += Constants.Score.CoinValue;
+        }
+        public void TakeHealthpack()
+        {
+            if (player.Health < Constants.Player.MaxHealth)
+                player.Health += Constants.Player.HealthpackValue;
+        }
+        #endregion
+        #region Animation
+        private void AnimatePlayer(Animator playerAnimator)
+        {
+            //PlayerAnimator.SetBool("OnGround", onGround);
+            playerAnimator.SetBool("IsWalking", direction != 0);
+        }
+        #endregion
     }
 }
