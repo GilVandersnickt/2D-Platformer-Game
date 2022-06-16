@@ -9,6 +9,7 @@ namespace Assets.Scripts.Controllers.Game
     public class GameController : MonoBehaviour
     {
         private IGameService _gameService;
+        private IPlayerService _playerService;
 
         public GameObject GameOverScreen;
         public GameObject PauseScreen;
@@ -19,25 +20,20 @@ namespace Assets.Scripts.Controllers.Game
         public Sprite EmptyHeart;
         public GameObject[] Characters;
 
-        public static int Health;
-        public static int Score;
-        public static bool IsGameOver;
-
         [Inject]
         PlayerController.Factory playerControllerFactory;
 
         [Inject]
-        public void Construct(IGameService gameService)
+        public void Construct(IGameService gameService, IPlayerService playerService)
         {
             _gameService = gameService;
+            _playerService = playerService;
         }
 
         private void Awake()
         {
             playerControllerFactory.Create();
             _gameService.Start();
-            PauseGame();
-            ResumeGame();
         }
 
         void Update()
@@ -45,7 +41,7 @@ namespace Assets.Scripts.Controllers.Game
             _gameService.Play();
             _gameService.UpdateUI(TimeLeftUI, ScoreUI, GameOverScreen, HeartsUI, EmptyHeart, FullHeart);
 
-            if (IsGameOver)
+            if (_playerService.GetPlayer().IsGameOver)
                 GameOver();
         }
 
