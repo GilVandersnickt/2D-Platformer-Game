@@ -21,7 +21,14 @@ namespace Assets.Scripts.Installers
 
             // Factory for instantiating a player
             Container.BindFactory<PlayerController, PlayerController.Factory>()
-                .FromComponentInNewPrefab(playerPrefabs[PlayerPrefs.GetInt(Constants.PlayerPrefsTitles.SelectedCharacter, 0) - 1]);
+                .FromComponentInNewPrefab(playerPrefabs[GetPlayerIndex()]);
+
+            int GetPlayerIndex()
+            {
+                var index = PlayerPrefs.GetInt(Constants.PlayerPrefsTitles.SelectedCharacter);
+                Debug.Log("Selected character " + index + "is loading...");
+                return index - 1;
+            }
         }
     }
 }
