@@ -44,7 +44,7 @@
 
 ## Opbouw
 - Ik heb ervoor gekozen om dit project op te splitsen in **controller** klassen en **service** klassen die gebruik maken van **interfaces**. Hierdoor wordt in de UI enkel gebruik gemaakt van controllers die achterliggend de nodige services raadplegen. 
-- Om de services zo efficient mogelijk te kunnen gebruiken heb ik **dependency injection** toegevoegd via **Zenject**. Hiervoor heb ik een aparte klasse voorzien genaamd ***GameInstaller** waarin zich een IOC container bevindt. Ook bevindt zich hierin een factory voor de dependency injection van een klasse waarin een game object wordt geinstantieerd, aangezien dit niet standaard in Zenject wordt gedaan.
+- Om de services zo efficient mogelijk te kunnen gebruiken heb ik **dependency injection** toegevoegd via **Zenject**. Hiervoor heb ik een aparte klasse voorzien genaamd **GameInstaller** waarin zich een IOC container bevindt. Ook bevindt zich hierin een factory voor de dependency injection van een klasse waarin een game object wordt geinstantieerd, aangezien dit niet standaard in Zenject wordt gedaan.
 
 ## Links
 - Unity Learn:
