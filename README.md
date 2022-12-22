@@ -38,7 +38,6 @@ Voor de module **Innovative Project** zou ik een 2D game willen maken in Unity.
 - Een karakter verliest een leven wanneer een vijand frontaal tegen de speler loopt
 
 ## Bronnenlijst
-- PRI-06-Unity.pdf in de cursus van de module programming integration
 - https://docs.unity3d.com/Manual/Unity2D.html
 - https://learn.unity.com/ 
 - https://opengameart.org/content/platformer-art-deluxe voor de images in de assets
