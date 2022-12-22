@@ -1,10 +1,8 @@
-# Innovative Project 
+# **2D Game in Unity**
 
-## **2D Game in Unity**
+## Project
 
-### Project
-
-Voor de module **Innovative Project** zou ik een 2D game willen maken in Unity.  
+Een 2D game in Unity gelijkaardig met Super Mario.  
 
 ### Verantwoording en relevantie
 - **Wat is het?**
